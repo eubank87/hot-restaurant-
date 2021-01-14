@@ -20,10 +20,13 @@
 
             <div class="text-center">
                 <a href="/tables">
-                    <button class="btn btn-lg btn-primary">View Tables</button>
+                    <button class="btn btn-lg btn-primary">
+                        <span class="fa fa-list-alt"></span> View Tables</button>
                 </a>
                 <a href="/home">
-                    <button class="btn btn-lg btn-primary">Home</button>
+                    <button class="btn btn-lg btn-primary">
+                        <span class="fa fa-home"></span>
+                    </button>
                 </a>
             </div>
         </div>
@@ -69,6 +72,40 @@
             </div>
         </footer>
     </div>
+
+    <script type="text/javascript">
+
+        $(".submit").on("click", function() {
+            var newReservation = {
+                customerName: $("#reserve_name").val().trim(),
+                phoneNumber: $("#reserve_phone").val().trim(),
+                customerEmail: $("#reserve_email").val().trim(),
+                customerID: $("#reserve_uniqueID").val().trim()
+            }
+
+            console.log(newRes)
+
+            var currentURL = window.location.origin;
+
+            $.post(currentURL + "/api/tables", newReservation, function(data) {
+                if(data == true) {
+                    alert("Yay! You are officially booked")
+                }else {
+                    alert("Sorry you are on the wait list.")
+                }
+
+                $('#reserve_name').val("");
+                $('#reserve_phone').val("");
+                $('#reserve_email').val("");
+                $('#reserve_uniqueID').val("");
+            })
+
+            return false;
+
+        })
+
+    </script>
+
 </body>
 
 </html>
