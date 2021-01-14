@@ -1,18 +1,11 @@
+const http = require("http");
 const express = require("express");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const turtles = [
-    {
-        name: "Leo",
-        isTeenageMutant: true
-    },
-    {
-        name: "Garth",
-        isTeenageMutant: false
-    }
-]
+const tables = [];
+const reservations = [];
 
 app.get("/", (req, res)=>{
     res.send("Welcome to my site!")
