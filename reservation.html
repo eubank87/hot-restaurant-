@@ -65,7 +65,7 @@
         <footer class="footer">
             <div class="container">
                 <p>
-                    <a href="/api/tables">API Table Link</a>
+                    <a href="/api/reservations">API Table Link</a>
                     |
                     <a href="/api/waitlist">API Wait List</a>
                 </p>
@@ -83,14 +83,15 @@
                 customerID: $("#reserve_uniqueID").val().trim()
             }
 
-            console.log(newRes)
+            console.log(newReservation)
 
             var currentURL = window.location.origin;
 
-            $.post(currentURL + "/api/tables", newReservation, function(data) {
-                if(data == true) {
+            $.post(currentURL + "/api/reservations", newReservation, function(data) {
+              console.log('this is data', data);
+                if(data.type == 'table') {
                     alert("Yay! You are officially booked")
-                }else {
+                } else {
                     alert("Sorry you are on the wait list.")
                 }
 
