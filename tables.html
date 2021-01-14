@@ -81,7 +81,69 @@
 
     </div>
 
-    
+    <script type="text/javascript">
+    // ajax function to get data
+        function runTableQuery(){
+            $.ajax({ url: "/api/tables", method: "GET" })
+            .then(function(tableData){
+                // log table data, should show as object
+                console.log("Table data", tableData)
+
+                // loop over info and display each customer
+                for(let i = 0; i<tableData.length; i++){
+                    // variables for table list and list items
+                    const tableList = $("#tableList");
+                    const listItem = $("<li class='list-group-item mt-4>");
+                    
+                    listItem.append(
+                        $("<h2>").text("Table #: " + (i + 1)),
+                        $("<hr>"),
+                        $("<h2>").text("ID: " + tableData[i].customerID),
+                        $("<h2>").text("Name: " + tableData[i].customerName),
+                        $("<h2>").text("Email: " + tableData[i].customerEmail),
+                        $("<h2>").text("Phone: " + tableData[i].phoneNumber)
+                    );
+                    tableList.append(listItem);
+                }
+            });
+        }
+
+        function runWaitListQuery(){
+            $.ajax({ url: "/api/waitlist", method: "GET" })
+            .then(function(waitData){
+                console.log(waitData);
+                for(let i = 0; i<waitData.length; i++){
+                    const waitList = $("#waitList");
+                    const listItem = $("<li class='list-group-item mt-4>");
+
+                    listItem.append(
+                        $("<h2>").text("Table #: " + (i + 1)),
+                        $("<hr>"),
+                        $("<h2>").text("ID: " + waitData[i].customerID),
+                        $("<h2>").text("Name :" + waitData[i].customerName),
+                        $("<h2>").text("Email: " + waitData[i].customerEmail),
+                        $("<h2>").text("Phone: " + waitData[i].phoneNumber)
+                    );
+                    waitList.append(listItem);
+                }
+            });
+        }
+
+        function clearTable(){
+            alert("Clearing...");
+
+            $.ajax({ url: "/api/clear", method: "POST" }).then(function(){
+                $("#waitList").empty();
+                $("#tableList").empty();
+            });
+        }
+
+        $("#clear").on("click", clearTable());
+
+        runTableQuery();
+        runWaitListQuery();
+
+    </script>
 
 </body>
 
