@@ -43,14 +43,6 @@
                     </div>
                     <div class="card-body">
                         <ul id="tableList" class="list-group">
-                            <li class="list-group-item mt-4">
-                                <h2>Table #1</h2>
-                                <hr>
-                                <h2>ID: asdf</h2>
-                                <h2>Name: asdf</h2>
-                                <h2>Email: asdf</h2>
-                                <h2>Phone: asdf</h2>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -72,7 +64,7 @@
                 <p>
                     <a href="#" id="clear">Clear Table</a>
                     |
-                    <a href="/api/tables"> API Table Link</a>
+                    <a href="/api/reservations"> API Table Link</a>
                     |
                     <a href="/api/waitlist">API Wait List</a>
                 </p>
@@ -84,7 +76,7 @@
     <script type="text/javascript">
     // ajax function to get data
         function runTableQuery(){
-            $.ajax({ url: "/api/tables", method: "GET" })
+            $.ajax({ url: "/api/reservations", method: "GET" })
             .then(function(tableData){
                 // log table data, should show as object
                 console.log("Table data", tableData)
@@ -93,7 +85,7 @@
                 for(let i = 0; i<tableData.length; i++){
                     // variables for table list and list items
                     const tableList = $("#tableList");
-                    const listItem = $("<li class='list-group-item mt-4>");
+                    const listItem = $("<li class='list-group-item mt-4'>");
                     
                     listItem.append(
                         $("<h2>").text("Table #: " + (i + 1)),
@@ -114,7 +106,7 @@
                 console.log(waitData);
                 for(let i = 0; i<waitData.length; i++){
                     const waitList = $("#waitList");
-                    const listItem = $("<li class='list-group-item mt-4>");
+                    const listItem = $("<li class='list-group-item mt-4'>");
 
                     listItem.append(
                         $("<h2>").text("Table #: " + (i + 1)),
@@ -138,7 +130,7 @@
             });
         }
 
-        $("#clear").on("click", clearTable());
+        $("#clear").on("click", clearTable);
 
         runTableQuery();
         runWaitListQuery();

@@ -8,18 +8,9 @@ const PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-const tables = [{
-  testKey: 'testNameTables',
-  alsoTestKey: 'testNameTooTables'
-}];
-const reservations = [{
-  resName: 'dummyName',
-  tableNum: 'dummyTable'
-}];
-const waitlist = [{
-  testKey: 'testNameWait',
-  alsoTestKey: 'testNameTooWait'
-}]
+
+const reservations = [];
+const waitlist = [];
 
 app.get("/", (req, res)=>{
   res.sendFile(path.join(__dirname, 'index.html'))
@@ -35,10 +26,6 @@ app.get("/tables", (req,res)=>{
 
 app.get("/reservation", (req,res)=>{
   res.sendFile(path.join(__dirname, 'reservation.html'))
-})
-
-app.get("/api/tables", (req,res)=>{
-  res.json(tables);
 })
 
 app.get("/api/reservations", (req,res)=>{
@@ -61,6 +48,7 @@ app.post("/api/reservations", (req,res) => {
     newReservation.type = 'waitlist';
   }
   console.log(newReservation);
+  console.log('reservation array', reservations);
 
   // send back JSON object of new reservation
   res.json(newReservation);
