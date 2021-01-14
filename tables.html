@@ -9,19 +9,20 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div class="container">
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
-                <h1 class="display-4 text-center">Hot Restaruant</h1>
+                <h1 class="display-4 text-center">Hot Restaurant</h1>
                 <hr>
-                <h2 class="text-center">Current Reservations and Waiting List</h2>
+                <h2 class="text-center">Current reservations and waiting list</h2>
                 <br>
                 <div class="text-center">
                     <a href="/reservation">
-                        <button class="btn btn-lg btn-danger">
+                        <button class="btn btn-lg btn-res">
                             <span class="fa fa-credit-card"></span>Make Reservation
                         </button>
                     </a>
@@ -39,7 +40,7 @@
                 <!-- Current tables in use -->
                 <div class="card">
                     <div class="card-header">
-                        <h4>Current reservations</h4>
+                        <h4>Current Reservations:</h4>
                     </div>
                     <div class="card-body">
                         <ul id="tableList" class="list-group">
@@ -49,7 +50,7 @@
                 <!-- Waitlist -->
                 <div class="card mt-4">
                     <div class="card-header">
-                        <h4>Waiting List</h4>
+                        <h4>Waiting List:</h4>
                     </div>
                     <div class="card-body">
                         <ul id="waitList" class="list-group"></ul>
@@ -124,10 +125,12 @@
         function clearTable(){
             alert("Clearing...");
 
-            $.ajax({ url: "/api/clear", method: "POST" }).then(function(){
-                $("#waitList").empty();
-                $("#tableList").empty();
-            });
+            $("#waitList").empty();
+            $("#tableList").empty();
+            // $.ajax({ url: "/api/clear", method: "POST" }).then(function(){
+            //     $("#waitList").empty();
+            //     $("#tableList").empty();
+            // });
         }
 
         $("#clear").on("click", clearTable);
